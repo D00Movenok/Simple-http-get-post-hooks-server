@@ -59,7 +59,7 @@ def parse():
                         help='set server port (default: 80)')
 
     data.add_argument('-d', '--data', metavar='TEXT', type=str,
-                      default=b'Hello from D00Movenok',
+                      default='Hello from D00Movenok',
                       help='specify response data (default: "Hello from D00Movenok")')
     data.add_argument('-f', '--file', metavar='PATH', type=str,
                       help='specify response data from file')
@@ -68,12 +68,12 @@ def parse():
     global resp_data
     if args.file:
         try:
-            resp_data = open(args.file).read().encode()
+            resp_data = open(args.file, 'rb').read()
         except:
             print('[\x1b[1;31m-\x1b[0m] Can\'t read the file!')
             exit()
     else:
-        resp_data = args.data
+        resp_data = args.data.encode()
 
     return args.ip, args.port
 
